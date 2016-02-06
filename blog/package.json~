@@ -19,7 +19,7 @@
     "express-validator": "*",
     "express-session": "*",
     "express-messages":"*",
-    "multer": "^0.1.8",
+    "multer": "*",
     "moment": "*"
   }
 }
