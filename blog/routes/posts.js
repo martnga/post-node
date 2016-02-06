@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
-var db = require('monk')('localhost/blog');
+var db = require('monk')('localhost/myblog');
 
 
 router.get('/show/:id', function(req, res, next) {
@@ -34,7 +34,18 @@ router.post('/add', function(req, res, next){
     var body     = req.body.body;
     var author   = req.body.author;
     var date     = new Date();
-  
+
+    if(req.files.mainimage){
+        var mainImageOriginalName = req.files.mainimage.originalname;
+        var mainImageName         = req.files.mainimage.name;
+        var mainImageMime         = req.files.mainimage.mimetype;
+        var mainImagePath         = req.files.mainimage.path;
+        var mainImageExt          = req.files.mainimage.extension;
+        var mainImageSize         = req.files.mainimage.size;
+    } else {
+        var mainImageName = 'noimage.png';
+    }
+
     // Form Validation
 
     req.checkBody('title', 'Title field is required').notEmpty();
@@ -45,17 +56,11 @@ router.post('/add', function(req, res, next){
     var errors = req.validationErrors();
 
     if(errors){
-      
-       var categories = db.get('categories');
-      categories.find({},{}, function(err, categories){
-        res.render('addpost',{
-            "title": "Add Post",
-            "errors": errors,
+        res.render('addpost', {
+            "erors": errors,
             "title": title,
-            "body": body,
-            "categories": categories
+            "body": body
         });
-    });
     } else {
         var posts = db.get('posts');
 
@@ -65,8 +70,8 @@ router.post('/add', function(req, res, next){
             "body": body,
             "category": category,
             "date": date,
-            "author": author
-           // "image": mainImageName
+            "author": author,
+            "image": mainImageName
         }, function(err, post){
             if(err){
                 res.send('There was an issue submitting the post');
@@ -77,6 +82,13 @@ router.post('/add', function(req, res, next){
             }
         });
     }
+
+    req.checkBody('name','Name field is required').notEmpty();
+    req.checkBody('email','Email field is required').notEmpty();
+    req.checkBody('email','Email not valid').isEmail();
+    req.checkBody('username','Username field is required').notEmpty();
+    req.checkBody('password','Password field is required').notEmpty();
+    req.checkBody('password2','Password do not match').equals(req.body.password);
 
 });
 
