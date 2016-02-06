@@ -91,6 +91,9 @@ exports = module.exports = function(app, passport) {
   app.delete('/admin/users/:id/role-account/', require('./views/admin/users/index').unlinkAccount);
   app.delete('/admin/users/:id/', require('./views/admin/users/index').delete);
 
+  // event routes
+  app.get('/events/', require('./views/events/index').find);
+  
   //admin > administrators
   app.get('/admin/administrators/', require('./views/admin/administrators/index').find);
   app.post('/admin/administrators/', require('./views/admin/administrators/index').create);
