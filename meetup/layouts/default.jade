@@ -27,6 +27,12 @@ html
             li: a(href='/contact/') Contact
           ul.nav.navbar-nav.navbar-right
             if user && user.username
+              li: a(href='/myevents') 
+                i.fa.fa-calendar
+                |  My Events
+              li: a(href='/events/add') 
+                i.fa.fa-plus
+                |  Add Event         
               li: a(href='#{user.defaultReturnUrl}')
                 i.fa.fa-user
                 |  #{user.username}
@@ -37,6 +43,7 @@ html
 
     div.page
       div.container
+        != messages()
         block body
 
     div.footer
@@ -50,9 +57,13 @@ html
 
     div.ajax-spinner
       img(src='/media/ajax-pulse.gif', alt='Loading')
+      
+      // to ajax delete call
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')    
+    script(src='/layouts/main.js?#{cacheBreaker}')
 
     //if lte IE 9
-      script(src='/layouts/ie-sucks.min.js?#{cacheBreaker}')
+    script(src='/layouts/ie-sucks.min.js?#{cacheBreaker}')
     script(src='/layouts/core.min.js?#{cacheBreaker}')
 
     block feet

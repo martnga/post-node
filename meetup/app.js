@@ -12,6 +12,7 @@ var config = require('./config'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
+    flash = require('connect-flash'),
     csrf = require('csurf');
 
 //create express app
@@ -57,6 +58,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(csrf({ cookie: { signed: true } }));
 helmet(app);
+
+app.use(flash());
+app.use(function(req, res, next){
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
 
 //response locals
 app.use(function(req, res, next) {

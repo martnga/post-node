@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 exports.find = function(req, res, next){
   req.query.name = req.query.name ? req.query.name : '';
@@ -51,7 +51,7 @@ exports.read = function(req, res, next){
 
 exports.add = function(req, res){
     if (!req.isAuthenticated()){
-        req.flash('error', "You are not logged id");
+        req.flash('error', "You are not logged in");
             res.location('/events');
             res.redirect('/events');
     }
