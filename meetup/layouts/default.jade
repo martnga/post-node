@@ -23,7 +23,6 @@ html
             li: a(href='/') Home
             li: a(href='/about/') About
             li: a(href='/events/') Events
-            li: a(href='/signup/') Sign Up
             li: a(href='/contact/') Contact
           ul.nav.navbar-nav.navbar-right
             if user && user.username
@@ -32,7 +31,7 @@ html
                 |  My Events
               li: a(href='/events/add') 
                 i.fa.fa-plus
-                |  Add Event         
+                |  Add Event                   
               li: a(href='#{user.defaultReturnUrl}')
                 i.fa.fa-user
                 |  #{user.username}
@@ -57,13 +56,13 @@ html
 
     div.ajax-spinner
       img(src='/media/ajax-pulse.gif', alt='Loading')
-      
-      // to ajax delete call
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')    
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')      
     script(src='/layouts/main.js?#{cacheBreaker}')
 
     //if lte IE 9
-    script(src='/layouts/ie-sucks.min.js?#{cacheBreaker}')
+      script(src='/layouts/ie-sucks.min.js?#{cacheBreaker}')
     script(src='/layouts/core.min.js?#{cacheBreaker}')
+    
 
     block feet

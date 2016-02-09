@@ -76,7 +76,7 @@ exports.create = function(req, res, next){
     var fieldsToSet = {
       name: req.body.name,
       description: req.body.description,
-      venu: req.body.venu,
+      venue: req.body.venue,
       date: req.body.date,
       startTime: req.body.startTime,
       endTime: req.body.endTime,

@@ -10,9 +10,9 @@ var config = require('./config'),
     http = require('http'),
     path = require('path'),
     passport = require('passport'),
+    flash = require('connect-flash'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
-    flash = require('connect-flash'),
     csrf = require('csurf');
 
 //create express app
@@ -56,7 +56,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(csrf({ cookie: { signed: true } }));
+// app.use(csrf({ cookie: { signed: true } }));
 helmet(app);
 
 app.use(flash());
@@ -67,7 +67,7 @@ app.use(function(req, res, next){
 
 //response locals
 app.use(function(req, res, next) {
-  res.cookie('_csrfToken', req.csrfToken());
+  // res.cookie('_csrfToken', req.csrfToken());
   res.locals.user = {};
   res.locals.user.defaultReturnUrl = req.user && req.user.defaultReturnUrl();
   res.locals.user.username = req.user && req.user.username;
