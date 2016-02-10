@@ -1,4 +1,3 @@
-/*global requirejs:true*/
 'use strict';
 
 
@@ -12,7 +11,6 @@ require([/* Dependencies */], function () {
     var app = {
         initialize: function () {
             // Your code here
-           $(document).foundation();
         }
     };
 
